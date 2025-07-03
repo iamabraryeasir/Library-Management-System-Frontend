@@ -52,9 +52,11 @@ export const bookApiSlice = createApi({
         },
         providesTags: ['Book'],
       }),
+
       getBookById: builder.query<SingleBookResponse, string>({
         query: (bookId) => `/books/${bookId}`,
       }),
+
       deleteBook: builder.mutation<
         { success: boolean; message: string; data: null },
         string
@@ -65,9 +67,38 @@ export const bookApiSlice = createApi({
         }),
         invalidatesTags: ['Book'],
       }),
+
+      addBook: builder.mutation<
+        { success: boolean; message: string; data: IBook },
+        Partial<IBook>
+      >({
+        query: (body) => ({
+          url: '/books',
+          method: 'POST',
+          body,
+        }),
+        invalidatesTags: ['Book'],
+      }),
+
+      updateBook: builder.mutation<
+        { success: boolean; message: string; data: IBook },
+        { id: string; data: Partial<IBook> }
+      >({
+        query: ({ id, data }) => ({
+          url: `/books/${id}`,
+          method: 'PATCH',
+          body: data,
+        }),
+        invalidatesTags: ['Book'],
+      }),
     };
   },
 });
 
-export const { useGetBooksQuery, useGetBookByIdQuery, useDeleteBookMutation } =
-  bookApiSlice;
+export const {
+  useGetBooksQuery,
+  useGetBookByIdQuery,
+  useDeleteBookMutation,
+  useAddBookMutation,
+  useUpdateBookMutation,
+} = bookApiSlice;
