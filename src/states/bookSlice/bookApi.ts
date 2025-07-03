@@ -28,6 +28,7 @@ export const bookApiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl,
   }),
+  tagTypes: ['Book'],
   endpoints: (builder) => {
     return {
       getBooks: builder.query<
@@ -49,12 +50,24 @@ export const bookApiSlice = createApi({
           const queryString = queryParams.toString();
           return `/books${queryString ? `?${queryString}` : ''}`;
         },
+        providesTags: ['Book'],
       }),
       getBookById: builder.query<SingleBookResponse, string>({
         query: (bookId) => `/books/${bookId}`,
+      }),
+      deleteBook: builder.mutation<
+        { success: boolean; message: string; data: null },
+        string
+      >({
+        query: (bookId) => ({
+          url: `/books/${bookId}`,
+          method: 'DELETE',
+        }),
+        invalidatesTags: ['Book'],
       }),
     };
   },
 });
 
-export const { useGetBooksQuery, useGetBookByIdQuery } = bookApiSlice;
+export const { useGetBooksQuery, useGetBookByIdQuery, useDeleteBookMutation } =
+  bookApiSlice;

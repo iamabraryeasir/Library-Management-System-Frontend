@@ -10,16 +10,13 @@ import {
 import { Link } from 'react-router';
 import { Button } from '../ui/button';
 import { Edit, EyeIcon, TrashIcon } from 'lucide-react';
+import DeleteBookButtonWithConfirm from './DeleteBookButtonWithConfirm';
 
 export default function BookDisplayTable({
   books,
 }: {
   books: IBook[] | undefined;
 }) {
-  const handleDeleteBook = (bookId: string | undefined) => {
-    console.log(bookId);
-  };
-
   return (
     <Table>
       <TableHeader>
@@ -55,12 +52,10 @@ export default function BookDisplayTable({
                   <Edit />
                 </Button>
               </Link>
-              <Button
-                onClick={() => handleDeleteBook(book?._id)}
-                className="bg-red-500"
-              >
-                <TrashIcon />
-              </Button>
+              <DeleteBookButtonWithConfirm
+                bookId={book?._id}
+                trigger={<TrashIcon />}
+              />
             </TableCell>
           </TableRow>
         ))}
