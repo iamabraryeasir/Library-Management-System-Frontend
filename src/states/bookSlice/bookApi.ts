@@ -6,7 +6,15 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 interface BookResponse {
   success: boolean;
   message: string;
-  data: IBook[];
+  data: {
+    books: IBook[];
+    meta: {
+      total: number;
+      page: number;
+      limit: number;
+      totalPages: number;
+    };
+  };
 }
 
 export const bookApiSlice = createApi({
@@ -22,6 +30,7 @@ export const bookApiSlice = createApi({
           limit?: number;
           sort?: 'asc' | 'desc';
           filter?: IBook['genre'];
+          page?: number;
         } | void
       >({
         query: (params) => {
@@ -30,6 +39,7 @@ export const bookApiSlice = createApi({
             queryParams.append('limit', params.limit.toString());
           if (params?.sort) queryParams.append('sort', params.sort);
           if (params?.filter) queryParams.append('genre', params.filter);
+          if (params?.page) queryParams.append('page', params.page.toString());
           const queryString = queryParams.toString();
           return `/books${queryString ? `?${queryString}` : ''}`;
         },

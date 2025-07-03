@@ -4,7 +4,7 @@ import { Loader2Icon } from 'lucide-react';
 
 export default function BooksSection() {
   const { data, isLoading } = useGetBooksQuery({ limit: 8 });
-  const recentAddedBooks = data?.data;
+  const recentAddedBooks = data?.data?.books;
 
   return (
     <div className="max-w-7xl mx-auto flex flex-col items-center">
