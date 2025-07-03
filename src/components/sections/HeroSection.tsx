@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 export default function HeroSection() {
   return (
-    <section className="max-w-7xl mx-auto py-8 px-5 lg:px-0">
+    <section className="max-w-6xl mx-auto py-8 px-5 lg:px-0">
       <div className="bg-green-500 py-10 lg:py-20 px-5 flex flex-col items-center text-center rounded-2xl">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
           The Ultimate Solution for your Library Management

@@ -7,7 +7,7 @@ export default function BooksSection() {
   const recentAddedBooks = data?.data?.books;
 
   return (
-    <div className="max-w-7xl mx-auto flex flex-col items-center">
+    <div className="max-w-6xl mx-auto flex flex-col items-center">
       <div className="w-full">
         <h2 className="text-center font-medium text-2xl">
           Recently Added Books

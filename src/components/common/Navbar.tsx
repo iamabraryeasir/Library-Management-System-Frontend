@@ -5,7 +5,7 @@ import { Button } from '../ui/button';
 export default function Navbar() {
   return (
     <nav className="bg-white shadow-lg">
-      <div className="max-w-7xl mx-auto px-5 lg:px-0 py-3 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-5 lg:px-0 py-3 flex items-center justify-between">
         <Link to="/">
           <div className="font-bold text-3xl flex items-center">
             <BookOpen className="w-8 h-8 mr-3" />

@@ -1,8 +1,10 @@
+import DeleteBookButtonWithConfirm from '@/components/common/DeleteBookButtonWithConfirm';
 import { Button } from '@/components/ui/button';
 import { useGetBookByIdQuery } from '@/states/bookSlice/bookApi';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 export default function DetailedBookPage() {
+  const navigate = useNavigate();
   const { bookId } = useParams();
   const { data } = useGetBookByIdQuery(bookId!);
   const book = data?.data;
@@ -85,12 +87,10 @@ export default function DetailedBookPage() {
         >
           Edit
         </Button>
-        <Button
-          variant="destructive"
-          className="bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white px-7 py-2.5 rounded-xl font-semibold shadow-sm transition-all"
-        >
-          Delete
-        </Button>
+        <DeleteBookButtonWithConfirm
+          bookId={book?._id}
+          onDeleted={() => navigate('/books')}
+        />
       </div>
     </div>
   );

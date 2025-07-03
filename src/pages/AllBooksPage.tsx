@@ -35,7 +35,7 @@ export default function AllBooksPage() {
   return (
     <>
       {/* Filter */}
-      <div className="max-w-7xl mx-auto mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="max-w-6xl mx-auto mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div className="flex items-center gap-2">
           <label htmlFor="limit" className="font-medium">
             Books per page:
@@ -61,7 +61,7 @@ export default function AllBooksPage() {
       </div>
 
       {/* Data Display */}
-      <div className="max-w-7xl mx-auto my-10">
+      <div className="max-w-6xl mx-auto my-10">
         {isLoading || isFetching ? (
           <div className="h-[40rem] w-full flex items-center justify-center">
             <LoaderCircle className="animate-spin" />
