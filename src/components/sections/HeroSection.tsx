@@ -15,10 +15,18 @@ export default function HeroSection() {
         </p>
         <div className="flex gap-4">
           <Link to="/books">
-            <Button variant="secondary">All Books</Button>
+            <Button
+              variant="secondary"
+              className="text-base md:text-lg md:px-6 md:py-5"
+            >
+              All Books
+            </Button>
           </Link>
           <Link to="/create-book">
-            <Button variant="secondary">
+            <Button
+              variant="secondary"
+              className="text-base md:text-lg md:px-6 md:py-5"
+            >
               <Plus /> Add New
             </Button>
           </Link>
