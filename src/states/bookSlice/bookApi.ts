@@ -86,7 +86,7 @@ export const bookApiSlice = createApi({
       >({
         query: ({ id, data }) => ({
           url: `/books/${id}`,
-          method: 'PATCH',
+          method: 'PUT',
           body: data,
         }),
         invalidatesTags: ['Book'],

@@ -4,6 +4,7 @@ import DetailedBookPage from './DetailedBookPage';
 import BorrowBookPage from './BorrowBookPage';
 import BorrowSummaryPage from './BorrowSummaryPage';
 import CreateBookPage from './CreateBookPage';
+import EditBookPage from './EditBookPage';
 
 export {
   HomePage,
@@ -12,4 +13,5 @@ export {
   AllBooksPage,
   BorrowSummaryPage,
   CreateBookPage,
+  EditBookPage,
 };
