@@ -2,6 +2,7 @@ import type { IBook } from '@/types/book.type';
 import {
   Table,
   TableBody,
+  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -35,15 +36,15 @@ export default function BookDisplayTable({
       <TableBody>
         {books?.map((book) => (
           <TableRow>
-            <TableHead>{book.title}</TableHead>
-            <TableHead>{book.author}</TableHead>
-            <TableHead>{book.genre}</TableHead>
-            <TableHead>{book.isbn}</TableHead>
-            <TableHead>{book.copies}</TableHead>
-            <TableHead>
+            <TableCell>{book.title}</TableCell>
+            <TableCell>{book.author}</TableCell>
+            <TableCell>{book.genre}</TableCell>
+            <TableCell>{book.isbn}</TableCell>
+            <TableCell>{book.copies}</TableCell>
+            <TableCell>
               {book.available ? 'Available' : 'Not Available'}
-            </TableHead>
-            <TableHead className="flex items-center gap-4 justify-end">
+            </TableCell>
+            <TableCell className="flex items-center gap-4 justify-end">
               <Link to={`/books/${book._id}`}>
                 <Button className="bg-green-500">
                   <EyeIcon />
@@ -60,7 +61,7 @@ export default function BookDisplayTable({
               >
                 <TrashIcon />
               </Button>
-            </TableHead>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

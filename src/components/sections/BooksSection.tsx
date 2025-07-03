@@ -1,9 +1,9 @@
-import { useGetRecentAddedBooksQuery } from '@/states/bookSlice/bookApi';
+import { useGetBooksQuery } from '@/states/bookSlice/bookApi';
 import BookDisplayTable from '../common/BookDisplayTable';
 import { Loader2Icon } from 'lucide-react';
 
 export default function BooksSection() {
-  const { data, isLoading } = useGetRecentAddedBooksQuery();
+  const { data, isLoading } = useGetBooksQuery({ limit: 8 });
   const recentAddedBooks = data?.data;
 
   return (

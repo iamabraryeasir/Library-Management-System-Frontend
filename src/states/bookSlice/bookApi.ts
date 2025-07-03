@@ -16,11 +16,26 @@ export const bookApiSlice = createApi({
   }),
   endpoints: (builder) => {
     return {
-      getRecentAddedBooks: builder.query<BookResponse, void>({
-        query: () => '/books?limit=8',
+      getBooks: builder.query<
+        BookResponse,
+        {
+          limit?: number;
+          sort?: 'asc' | 'desc';
+          filter?: IBook['genre'];
+        } | void
+      >({
+        query: (params) => {
+          const queryParams = new URLSearchParams();
+          if (params?.limit)
+            queryParams.append('limit', params.limit.toString());
+          if (params?.sort) queryParams.append('sort', params.sort);
+          if (params?.filter) queryParams.append('genre', params.filter);
+          const queryString = queryParams.toString();
+          return `/books${queryString ? `?${queryString}` : ''}`;
+        },
       }),
     };
   },
 });
 
-export const { useGetRecentAddedBooksQuery } = bookApiSlice;
+export const { useGetBooksQuery } = bookApiSlice;
