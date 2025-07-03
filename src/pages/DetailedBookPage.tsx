@@ -1,7 +1,97 @@
+import { Button } from '@/components/ui/button';
+import { useGetBookByIdQuery } from '@/states/bookSlice/bookApi';
+import { useParams } from 'react-router';
+
 export default function DetailedBookPage() {
+  const { bookId } = useParams();
+  const { data } = useGetBookByIdQuery(bookId!);
+  const book = data?.data;
   return (
-    <div>
-      <h1>DetailedBookPage</h1>
+    <div className="max-w-2xl mx-auto mt-16 bg-gradient-to-br from-white via-slate-50 to-slate-100 shadow-lg rounded-3xl p-12 relative border border-slate-200">
+      <div className="flex flex-col md:flex-row md:items-center md:space-x-10">
+        <div className="flex-1">
+          <h1 className="text-5xl font-black text-slate-900 mb-1 tracking-tight">
+            {book?.title}
+          </h1>
+          <p className="text-xl text-slate-500 mb-8 font-medium">
+            {book?.author}
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+            <div className="flex flex-col">
+              <span className="text-xs text-slate-400 uppercase tracking-widest font-semibold">
+                Genre
+              </span>
+              <span className="text-base font-semibold text-slate-700">
+                {book?.genre.replace('_', ' ')}
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs text-slate-400 uppercase tracking-widest font-semibold">
+                ISBN
+              </span>
+              <span className="text-base font-semibold text-slate-700">
+                {book?.isbn}
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs text-slate-400 uppercase tracking-widest font-semibold">
+                Published
+              </span>
+              <span className="text-base font-semibold text-slate-700">
+                {book?.createdAt
+                  ? new Date(book.createdAt).toLocaleDateString('en-US', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    })
+                  : 'N/A'}
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs text-slate-400 uppercase tracking-widest font-semibold">
+                Copies
+              </span>
+              <span className="text-base font-semibold text-slate-700">
+                {book?.copies}
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs text-slate-400 uppercase tracking-widest font-semibold">
+                Available
+              </span>
+              <span
+                className={`text-base font-bold ${
+                  book?.available ? 'text-emerald-600' : 'text-rose-500'
+                }`}
+              >
+                {book?.available ? 'Yes' : 'No'}
+              </span>
+            </div>
+          </div>
+          <div className="mb-10">
+            <span className="text-xs text-slate-400 uppercase tracking-widest font-semibold">
+              Description
+            </span>
+            <p className="text-slate-700 mt-3 text-lg leading-relaxed">
+              {book?.description || 'No description available.'}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="flex justify-end space-x-4 mt-12">
+        <Button
+          variant="outline"
+          className="border-blue-600 text-blue-700 hover:bg-blue-50 px-7 py-2.5 rounded-xl font-semibold shadow-sm transition-all"
+        >
+          Edit
+        </Button>
+        <Button
+          variant="destructive"
+          className="bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white px-7 py-2.5 rounded-xl font-semibold shadow-sm transition-all"
+        >
+          Delete
+        </Button>
+      </div>
     </div>
   );
 }

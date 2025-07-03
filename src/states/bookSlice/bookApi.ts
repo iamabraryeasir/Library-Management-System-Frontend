@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
-interface BookResponse {
+interface BulkBookResponse {
   success: boolean;
   message: string;
   data: {
@@ -17,6 +17,12 @@ interface BookResponse {
   };
 }
 
+interface SingleBookResponse {
+  success: boolean;
+  message: string;
+  data: IBook;
+}
+
 export const bookApiSlice = createApi({
   reducerPath: 'books',
   baseQuery: fetchBaseQuery({
@@ -25,7 +31,7 @@ export const bookApiSlice = createApi({
   endpoints: (builder) => {
     return {
       getBooks: builder.query<
-        BookResponse,
+        BulkBookResponse,
         {
           limit?: number;
           sort?: 'asc' | 'desc';
@@ -44,8 +50,11 @@ export const bookApiSlice = createApi({
           return `/books${queryString ? `?${queryString}` : ''}`;
         },
       }),
+      getBookById: builder.query<SingleBookResponse, string>({
+        query: (bookId) => `/books/${bookId}`,
+      }),
     };
   },
 });
 
-export const { useGetBooksQuery } = bookApiSlice;
+export const { useGetBooksQuery, useGetBookByIdQuery } = bookApiSlice;

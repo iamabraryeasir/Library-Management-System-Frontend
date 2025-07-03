@@ -18,8 +18,8 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/books" element={<AllBooksPage />} />
         <Route path="/create-book" element={<BookFormPage />} />
-        <Route path="/books/:id" element={<DetailedBookPage />} />
-        <Route path="/edit-book/:id" element={<BookFormPage />} />
+        <Route path="/books/:bookId" element={<DetailedBookPage />} />
+        <Route path="/edit-book/:bookId" element={<BookFormPage />} />
         <Route path="/borrow/:bookId" element={<BorrowBookPage />} />
         <Route path="/borrow-summary" element={<BorrowSummaryPage />} />
       </Routes>
