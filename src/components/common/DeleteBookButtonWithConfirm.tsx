@@ -10,6 +10,7 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
+import { toast } from 'react-hot-toast';
 
 interface DeleteBookButtonWithConfirmProps {
   bookId: string | undefined;
@@ -34,9 +35,23 @@ export default function DeleteBookButtonWithConfirm({
   const [deleteBook, { isLoading }] = useDeleteBookMutation();
 
   const handleDelete = async () => {
-    await deleteBook(bookId!).unwrap();
-    setOpen(false);
-    onDeleted?.();
+    try {
+      await deleteBook(bookId!).unwrap();
+      toast.success('Book deleted successfully!');
+      setOpen(false);
+      onDeleted?.();
+    } catch (err: unknown) {
+      let errorMsg = 'Failed to delete book. Please try again.';
+      if (typeof err === 'object' && err !== null) {
+        const errorObj = err as {
+          data?: { message?: string };
+          message?: string;
+        };
+        errorMsg = errorObj?.data?.message || errorObj?.message || errorMsg;
+      }
+      toast.error(errorMsg);
+      setOpen(false);
+    }
   };
 
   return (

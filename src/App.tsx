@@ -14,7 +14,7 @@ import { Toaster } from 'react-hot-toast';
 export default function App() {
   return (
     <>
-      <Toaster />
+      <Toaster position="top-right" reverseOrder={false} />
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
