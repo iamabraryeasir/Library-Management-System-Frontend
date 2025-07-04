@@ -11,6 +11,7 @@ import { Link } from 'react-router';
 import { Button } from '../ui/button';
 import { Edit, EyeIcon, TrashIcon } from 'lucide-react';
 import DeleteBookButtonWithConfirm from './DeleteBookButtonWithConfirm';
+import BorrowBookButtonWithConfirm from './BorrowBookButtonWithConfirm';
 
 export default function BookDisplayTable({
   books,
@@ -52,6 +53,10 @@ export default function BookDisplayTable({
                   <Edit />
                 </Button>
               </Link>
+              <BorrowBookButtonWithConfirm
+                bookId={book?._id}
+                availableCopies={book.copies}
+              />
               <DeleteBookButtonWithConfirm
                 bookId={book?._id}
                 trigger={<TrashIcon />}
